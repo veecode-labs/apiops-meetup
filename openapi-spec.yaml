@@ -1,0 +1,57 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: ViaCEP
+  description: "ViaCEP"
+  contact:
+    name: "API Support"
+    url: "http://www.example.com/support"
+    email: "support@example.com"
+servers:
+  - url: https://viacep.com.br/ws
+    description: ViaCEP service TESTE
+
+paths:
+  /{cep}/json:
+    get:
+      summary: Busca CEP
+      description: Retorna endereço de um CEP
+      operationId: buscaCEPJson
+      tags:
+        - cep
+      parameters:
+        - name: cep
+          in: path
+          description: CEP a consultar
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+      x-kong-plugin-rate-limiting:
+        enabled: true
+        config:
+          policy: local
+          minute: 5
+          
+  /{cep}/xml:
+    get:
+      summary: Busca CEP (xml)
+      description: Retorna endereço de um CEP (xml)
+      operationId: buscaCEPXml
+      tags:
+        - cep
+      parameters:
+        - name: cep
+          in: path
+          description: CEP a consultar
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+tags:
+  - name: cep
+  

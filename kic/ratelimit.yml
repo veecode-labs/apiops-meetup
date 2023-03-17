@@ -1,0 +1,11 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: add-rate-limiting-m0
+plugin: rate-limiting
+config:
+  policy: local
+  minute: 5
+  # policy: redis
+  # redis_host: redis-master
+  # redis_password: vert123
